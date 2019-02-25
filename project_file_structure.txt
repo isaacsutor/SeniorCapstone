@@ -1,0 +1,37 @@
+ProjectFolder/
+  - src/
+     - my_project/
+        - model/
+           - preference.py # Interact with config params
+           - api.py # Interact with our REST api
+
+        - controller/
+           - startup.py # Initialization code
+           - login.py # Login a user
+
+        - view/
+           - main_window.py # Application container
+           - login_widget.py # Login form
+
+        - main.py # Application entry point.
+
+  - tests/
+      - my_project_tests/
+          - model/
+          - view/
+          - controller/
+
+  - resources/
+      - ui/ # The files match basically one to one with the modules in the view directory.
+        - main_window.ui
+        - login_widget.ui
+      - images/
+        - logo.png
+
+  - setup.py # Script to build the application (calling into the build_py2exe, etc. files below)
+  - build_py2exe.py # Build the py2exe exe
+  - build_py2app.py # Build the py2app app
+  - build_win_installer.iss # Package up the py2exe into an installer (Using inno setup).
+  - build_dmg.py #Package up the py2app into a DMG
+
+  - runtests.py # Run the tests
