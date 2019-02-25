@@ -140,8 +140,8 @@ for e in range(epochs):
             pred = net.run(out, feed_dict={X: X_test})
             line2.set_ydata(pred)
             plt.title('Epoch ' + str(e) + ', Batch ' + str(i))
-            # file_name = 'img/epoch_' + str(e) + '_batch_' + str(i) + '.jpg'
-            # plt.savefig(file_name)
+            file_name = 'img/epoch_' + str(e) + '_batch_' + str(i) + '.png'
+            plt.savefig(file_name)
             plt.pause(0.01)
 
 # Print final MSE after Training
