@@ -6,8 +6,15 @@ import matplotlib.pyplot as plt
 
 
 data = pd.read_csv('data_stocks.csv')
-
 data = data.drop(['DATE'], 1)
+# data = pd.read_csv('SP500.csv')
+# data = data.drop(['Date'], 1)
+# data = data.drop(['Open'], 1)
+# data = data.drop(['High'], 1)
+# data = data.drop(['Low'], 1)
+# data = data.drop(['Adj Close'], 1)
+# data = data.drop(['Volume'], 1)
+
 
 n = data.shape[0]
 p = data.shape[1]
@@ -39,6 +46,7 @@ y_test = data_test[:, 0]
 # Parameters
 # n_stocks = X_train.shape[1]
 n_stocks = 500
+# n_stocks = 1
 n_neurons_1 = 1024
 n_neurons_2 = 512
 n_neurons_3 = 256
