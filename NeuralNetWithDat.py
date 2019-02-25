@@ -144,6 +144,6 @@ for e in range(epochs):
             plt.pause(0.01)
 
 # Print final MSE after Training
-# mse_final = net.run(mse, feed_dict={X: X_test, Y: y_test})
-# print(mse_final)
+mse_final = net.run(mse, feed_dict={X: X_test, Y: y_test})
+print(mse_final)
 
