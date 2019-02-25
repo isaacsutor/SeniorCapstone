@@ -36,13 +36,6 @@ y_train = data_train[:, 0]
 X_test = data_test[:, 1:]
 y_test = data_test[:, 0]
 
-
-# x contains the network inputs
-# y contains the outputs
-X = tf.placeholder(dtype=tf.float32, shape=[None, n_stocks])
-Y = tf.placeholder(dtype=tf.float32, shape=[None])
-
-
 # Parameters
 # n_stocks = X_train.shape[1]
 n_stocks = 500
@@ -51,6 +44,14 @@ n_neurons_2 = 512
 n_neurons_3 = 256
 n_neurons_4 = 128
 n_target = 1
+
+# x contains the network inputs
+# y contains the outputs
+X = tf.placeholder(dtype=tf.float32, shape=[None, n_stocks])
+Y = tf.placeholder(dtype=tf.float32, shape=[None])
+
+
+
 
 # Initializer
 sigma = 1
@@ -117,7 +118,7 @@ mse_test = []
 
 for e in range(epochs):
     # Shuffle training data
-    shuffle_indices = np.random.permutation(np.arrange(len(y_train)))
+    shuffle_indices = np.random.permutation(np.arange(len(y_train)))
     X_train = X_train[shuffle_indices]
     y_train = y_train[shuffle_indices]
 
@@ -139,8 +140,8 @@ for e in range(epochs):
             pred = net.run(out, feed_dict={X: X_test})
             line2.set_ydata(pred)
             plt.title('Epoch ' + str(e) + ', Batch ' + str(i))
-            file_name = 'img/epoch_' + str(e) + '_batch_' + str(i) + '.jpg'
-            plt.savefig(file_name)
+            # file_name = 'img/epoch_' + str(e) + '_batch_' + str(i) + '.jpg'
+            # plt.savefig(file_name)
             plt.pause(0.01)
 
 # Print final MSE after Training
