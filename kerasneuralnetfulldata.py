@@ -22,7 +22,7 @@ import math
 # Microsoft Cognitive Toolkit
 # set_backend("cntk")
 np.random.seed(7)
-msft_dataset = pd.read_csv('SP500.csv')
+msft_dataset = pd.read_csv('SP500short.csv')
 msft_dataset.head()
 
 msft_dataset['Date'] = pd.to_datetime(msft_dataset['Date'])
