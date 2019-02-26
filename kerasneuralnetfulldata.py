@@ -13,14 +13,7 @@ from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 import math
 
-# def set_backend(backend):
-    # if K.backend() != backend:
-        # os.environ['KERAS_BACKEND'] = backend
-        # reload(K)
-        # assert K.backend() == backend
 
-# Microsoft Cognitive Toolkit
-# set_backend("cntk")
 np.random.seed(7)
 msft_dataset = pd.read_csv('SP500.csv')
 msft_dataset.head()
