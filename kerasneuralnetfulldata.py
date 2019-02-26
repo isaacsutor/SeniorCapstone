@@ -22,7 +22,7 @@ import math
 # Microsoft Cognitive Toolkit
 # set_backend("cntk")
 np.random.seed(7)
-msft_dataset = pd.read_csv('SP500short.csv')
+msft_dataset = pd.read_csv('SP500.csv')
 msft_dataset.head()
 
 msft_dataset['Date'] = pd.to_datetime(msft_dataset['Date'])
@@ -58,6 +58,7 @@ def create_ts(ds, series):
         Y.append(ds[i+series, 0])
     return np.array(X), np.array(Y)
 
+
 series = 7
 
 trainX, trainY = create_ts(msft_train, series)
@@ -70,7 +71,7 @@ model = Sequential()
 model.add(LSTM(4, input_shape=(series, 1)))
 model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam')
-model.fit(trainX, trainY, epocks=100, batch_size=32)
+model.fit(trainX, trainY, epochs=100, batch_size=32)
 
 trainPredictions = model.predict(trainX)
 testPredictions = model.predict(testX)
