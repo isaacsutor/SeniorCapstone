@@ -1,27 +1,33 @@
+import pandas_datareader.data as web
+import datetime
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 
 app = dash.Dash()
+stock = 'AAPL.US'
+start = datetime.datetime(2015, 1, 1)
+end = datetime.datetime(2018, 2, 8)
+df = web.DataReader(stock, 'quandl', start, end)
+df.reset_index(inplace=True)
+df.set_index("Date", inplace=True)
+df = df.drop("Symbol", axis=1)
 
 app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
-
-
+    html.H1(children='Whoa, a graph!'),
 
     html.Div(children='''
-        Dash: A web application framework for Python.
+        Making a stock graph!.
     '''),
 
     dcc.Graph(
         id='example-graph',
         figure={
             'data': [
-                {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'line', 'name': 'SF'},
-                {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
+                {'x': df.index, 'y': df.Close, 'type': 'line', 'name': stock},
             ],
             'layout': {
-                'title': 'Dash Data Visualization'
+                'title': stock
             }
         }
     )
