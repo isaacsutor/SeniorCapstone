@@ -5,10 +5,10 @@ import dash_core_components as dcc
 import dash_html_components as html
 
 app = dash.Dash()
-stock = 'AAPL.US'
+stock = 'TSLA'
 start = datetime.datetime(2015, 1, 1)
 end = datetime.datetime(2018, 2, 8)
-df = web.DataReader(stock, 'quandl', start, end)
+df = web.DataReader('TSLA', 'yahoo', start, end)
 df.reset_index(inplace=True)
 df.set_index("Date", inplace=True)
 df = df.drop("Symbol", axis=1)
