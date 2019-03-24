@@ -27,13 +27,13 @@ with open('SP500.csv') as csvfile:
             count += 1
         else:
             vals.append(float(row[4].replace(',', '')))
-train_size = int(len(vals)*0.7)
+train_size = int(len(vals) * 0.7)
 test_size = len(vals) - train_size
 vals = vals[train_size:len(vals)]
 vals.reverse()
 X.append(1)
 portfolio_val = 10000
-stocks_owned = portfolio_val/vals[len(vals)-1]
+stocks_owned = portfolio_val / vals[len(vals) - 1]
 Y.append(vals.pop())
 # print(vals[0])
 own_stocks = True
@@ -43,49 +43,49 @@ app.layout = html.Div(
         html.H3('S&P 500 Stock Trading'),
         html.Div(html.Button('Click To Start', id='button')),
         html.Button(
-                "Buy",
-                id="Buy",
-                n_clicks=0,
-                style={"margin": "0px 7px 7px 10px","textAlign": "center"},
-            ),
+            "Buy",
+            id="Buy",
+            n_clicks=0,
+            style={"margin": "0px 7px 7px 10px", "textAlign": "center"},
+        ),
         html.Button(
-                "Sell",
-                id="Sell",
-                n_clicks=0,
-                style={"margin": "0px 7px 7px 10px","textAlign": "center"},
-            ),
+            "Sell",
+            id="Sell",
+            n_clicks=0,
+            style={"margin": "0px 7px 7px 10px", "textAlign": "center"},
+        ),
         dcc.Graph(id='live-graph', animate=True),
         dcc.Interval(
             id='graph-update',
-            interval=1*100
+            interval=1 * 100
         ),
         html.Div(
-                children=[
-                    dcc.Location(id="bottom_tab", refresh=False),
-                    # dcc.Link("Open positions", id="open_positions", href="/"),
-                    # dcc.Link("Closed positions", id="closed_positions", href="/closed"),
-                    # html.Div(
-                        # dcc.Dropdown(id="closable_orders", placeholder="Close order"),
-                        # style={"width": "15%"},
-                        # id="close_orders_div",
-                    # ),
-                    html.Div(
-                        children=[html.Table(id="orders_table")],
-                        className="row",
-                        style={"padding": "3", "textAlign": "center"},
-                        id="bottom_content",
-                    ),
-                ],
-                id="bottom_panel",
-                className="row",
-                style={
-                    "overflowY": "auto",
-                    "margin": "9px 5px 0px 5px",
-                    "padding": "5",
-                    "height": "21%",
-                    "backgroundColor": "#1a2d46",
-                },
-            )
+            children=[
+                dcc.Location(id="bottom_tab", refresh=False),
+                # dcc.Link("Open positions", id="open_positions", href="/"),
+                # dcc.Link("Closed positions", id="closed_positions", href="/closed"),
+                # html.Div(
+                # dcc.Dropdown(id="closable_orders", placeholder="Close order"),
+                # style={"width": "15%"},
+                # id="close_orders_div",
+                # ),
+                html.Div(
+                    children=[html.Table(id="orders_table")],
+                    className="row",
+                    style={"padding": "3", "textAlign": "center"},
+                    id="bottom_content",
+                ),
+            ],
+            id="bottom_panel",
+            className="row",
+            style={
+                "overflowY": "auto",
+                "margin": "9px 5px 0px 5px",
+                "padding": "5",
+                "height": "21%",
+                "backgroundColor": "#1a2d46",
+            },
+        )
     ]
 )
 
@@ -119,47 +119,47 @@ def update_graph_scatter(btn_click, buy_click, sell_click):
 
     if buy_click is 1:
         if own_stocks is False:
-            stocks_owned = portfolio_val/vals[len(vals)-1]
+            stocks_owned = portfolio_val / vals[len(vals) - 1]
             print("Stocks Bought: ", portfolio_val)
             own_stocks = True
 
     if own_stocks:
-        portfolio_val = stocks_owned * vals[len(vals)-1]
-        print("Value changing:", portfolio_val, " Stocked owned: ", stocks_owned, "At Value:", vals[len(vals)-1])
+        portfolio_val = stocks_owned * vals[len(vals) - 1]
+        print("Value changing:", portfolio_val, " Stocked owned: ", stocks_owned, "At Value:", vals[len(vals) - 1])
     else:
         print("Value Stagnant:", portfolio_val)
         print(stocks_owned)
         # print(0)
 
-
     if btn_click != 0:
         # It was triggered by a click on the button 1
-        X.append(X[-1]+1)
+        X.append(X[-1] + 1)
         # Y.append(Y[-1]+Y[-1]*random.uniform(-0.1,0.1))
         # X.append(dates.pop())
         # Y.append(stock_value.pop())
         Y.append(vals.pop())
         data = plotly.graph_objs.Scatter(
-                x=list(X),
-                y=list(Y),
-                name='Scatter',
-                # mode= 'lines+markers'
-                mode='lines'
-                )
-        return {'data': [data],'layout' : go.Layout(xaxis=dict(range=[min(X), max(X)+10]),
-                                                    yaxis=dict(range=[min(Y)-20, max(Y)+20]), )}
+            x=list(X),
+            y=list(Y),
+            name='Scatter',
+            # mode= 'lines+markers'
+            mode='lines'
+        )
+        return {'data': [data], 'layout': go.Layout(xaxis=dict(range=[min(X), max(X) + 10]),
+                                                    yaxis=dict(range=[min(Y) - 20, max(Y) + 20]), )}
 
 
 @app.callback(Output('Buy', 'n_clicks'),
-              events=[Event('graph-update', 'interval')],)
+              events=[Event('graph-update', 'interval')], )
 def update():
     return 0
 
 
 @app.callback(Output('Sell', 'n_clicks'),
-              events=[Event('graph-update', 'interval')],)
+              events=[Event('graph-update', 'interval')], )
 def update():
     return 0
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
