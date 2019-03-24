@@ -143,10 +143,11 @@ def update_graph_scatter(btn_click, buy_click, sell_click):
                 x=list(X),
                 y=list(Y),
                 name='Scatter',
-                mode= 'lines+markers'
+                # mode= 'lines+markers'
+                mode='lines'
                 )
-        return {'data': [data],'layout' : go.Layout(xaxis=dict(range=[min(X),max(X)]),
-                                                    yaxis=dict(range=[min(Y),max(Y)]),)}
+        return {'data': [data],'layout' : go.Layout(xaxis=dict(range=[min(X), max(X)+10]),
+                                                    yaxis=dict(range=[min(Y)-20, max(Y)+20]), )}
 
 
 @app.callback(Output('Buy', 'n_clicks'),
