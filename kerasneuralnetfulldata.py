@@ -12,6 +12,8 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 import math
+from keras.models import model_from_json
+
 
 
 np.random.seed(7)
@@ -65,6 +67,13 @@ model.add(LSTM(4, input_shape=(series, 1)))
 model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam')
 model.fit(trainX, trainY, epochs=100, batch_size=32)
+# serialize model to JSON
+model_json = model.to_json()
+with open("model.json", "w") as json_file:
+    json_file.write(model_json)
+# serialize weights to HDF5
+model.save_weights("model.h5")
+print("Saved model to disk")
 
 trainPredictions = model.predict(trainX)
 testPredictions = model.predict(testX)
