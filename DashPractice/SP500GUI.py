@@ -57,7 +57,7 @@ app.layout = html.Div(
             style={"margin": "0px 7px 7px 10px", "textAlign": "center"},
         ),
         html.Div(id='live-update-text'),
-        html.Div(id='results'),
+        html.Div(id='res'),
         dcc.Graph(id='live-graph', animate=True),
         dcc.Interval(
             id='graph-update',
@@ -105,7 +105,6 @@ app.layout = html.Div(
 def update_graph_scatter(btn_click, buy_click, sell_click):
     if btn_click is None:
         btn_click = 0
-
     if btn_click != 0:
         # It was triggered by a click on the button 1
         X.append(X[-1] + 1)
@@ -118,6 +117,8 @@ def update_graph_scatter(btn_click, buy_click, sell_click):
             Y.append(vals.pop())
         else:
             endGraph()
+            runResults()
+            endIntervals()
             start = False
 
         data = plotly.graph_objs.Scatter(
@@ -134,7 +135,7 @@ def update_graph_scatter(btn_click, buy_click, sell_click):
 
 @app.callback(Output('live-update-text', 'children'),
               [Input('Buy', 'n_clicks'),
-               Input('Sell', 'n_clicks'),],
+               Input('Sell', 'n_clicks'), ],
               events=[Event('graph-update', 'interval')],)
 def update_score(buy_click, sell_click):
     style = {'padding': '5px', 'fontSize': '16px'}
@@ -173,8 +174,9 @@ def update_score(buy_click, sell_click):
             # print(0)
         else:
             endGraph()
-            runResults()
+            endIntervals()
             start = False
+            runResults()
     return [
         html.Span('Portfolio Value: {0:.2f}'.format(portfolio_val), style=style),
         html.Span('Stocks Owned: {0:.2f}'.format(stocks_owned), style=style),
@@ -182,9 +184,18 @@ def update_score(buy_click, sell_click):
     ]
 
 
-@app.callback(Output('results', 'children'), )
+@app.callback(Output('res', 'children'), )
 def runResults():
-    return html.Span('If you had held your stocks the whole way through, your end portfolio value would be: $30485.87')
+    # style = {'padding': '5px', 'fontSize': '16px'}
+    return [
+        html.H3('If you had held your stocks the whole way through, your end portfolio value would be: $30485.87'),
+        # html.Span('Portfolio Value: {0:.2f}'.format(portfolio_val), style=style),
+    ]
+
+
+@app.callback(Output('graph-update', 'interval'), )
+def endIntervals():
+    return 0
 
 
 @app.callback(Output('button', 'n_clicks'), )
