@@ -81,4 +81,6 @@ wrapt                   | v1.11.1
 
 
 ## How to Feature Request, Report Issues, or Submit Code for Review ##
-
+* To report issues or bugs, feel free to click the issues tab and click new issue detailing what is wrong, your use case, and your setup so I can locate the issue and patch it.
+* To request a new feature simply use the report issue tab and tag your report with "[Feature Request]" in the beginning of the subject
+* To submit your own additions to this project, make a pull request and when you have finished adding your code, request a push and I will merge accordingly
