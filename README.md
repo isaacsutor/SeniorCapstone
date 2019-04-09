@@ -18,15 +18,15 @@ Package | Version
 ------------ | -------------
 Click                   | v7.0
 Flask                   | v1.0.2
-Flask-Compress        | v1.4.0
+Flask-Compress          | v1.4.0
 Jinja2                  | v2.10
 Keras                   | v2.2.4
-Keras-Applications    | v1.0.7
-Keras-Preprocessing   | v1.0.9
+Keras-Applications      | v1.0.7
+Keras-Preprocessing     | v1.0.9
 Markdown                | v3.0.1
 MarkupSafe              | v1.1.1
 PyQt5                   | v5.10
-PyQt5-sip             | v4.19.14
+PyQt5-sip               | v4.19.14
 PyYAML                  | v3.13
 Werkzeug                | v0.14.1
 absl-py                 | v0.7.0
@@ -36,14 +36,49 @@ certifi                 | v2019.3.9
 chardet                 | v3.0.4
 cycler                  | v0.10.0
 dash                    | v0.30.0
-dash-core-components  | v0.38.0
-dash-html-components  | v0.13.2
-dash-renderer         | v0.15.0
-dash-table            | v3.6.0
+dash-core-components    | v0.38.0
+dash-html-components    | v0.13.2
+dash-renderer           | v0.15.0
+dash-table              | v3.6.0
 decorator               | v4.3.2
 h5py                    | v2.9.0
 html5lib                | v0.9999999
 idna                    | v2.8
-Tensorflow              | v
+ipython-genutils        | v0.2.0
+itsdangerous            | v1.1.0
+jsonschema              | v3.0.1
+jupyter-core            | v4.4.0
+kiwisolver              | v1.0.1
+lxml                    | v4.3.2
+matplotlib              | v3.0.0
+nbformat                | v4.4.0
+numpy                   | v1.16.1
+pandas                  | v0.24.1
+pandaas-datareader      | v0.7.0
+pip                     | v10.0.1
+plotly                  | v3.7.0
+protobuf                | v3.6.1
+pyparsing               | v2.3.1
+pyrsistent              | v0.14.11
+python-dateutil         | v2.8.0
+pytz                    | v2018.9
+requests                | v2.21.0
+retrying                | v1.3.3
+scikit-learn            | v0.20.2
+scipy                   | v1.2.1
+setuptools              | v39.1.0
+sip                     | v4.19.8
+six                     | v1.12.0
+sklearn                 | v0.0
+tensorflow              | v1.5.0
+tensorflow-tensorboard  | v1.5.1
+traitlets               | v4.3.2
+urlib3                  | v1.24.1
+wheel                   | v0.32.3
+wrapt                   | v1.11.1
+
+
+
+
 ## How to Feature Request, Report Issues, or Submit Code for Review ##
 
