@@ -7,3 +7,12 @@ This Program does three things:
 1. Lets you trade stocks from a starting profile of $10,000 in an attempt to beat the market
 1. Compares your results to using a Neural Net for the same job as well as a buy and hold strategy
 1. Points players in the direction of additional resources and information on why to not daytrade
+
+## How the Program Works ##
+
+
+## How to Run It ##
+
+
+## How to Feature Request, Report Issues, or Submit Code for Review ##
+
