@@ -17,34 +17,34 @@ This Program does three things:
 Package | Version
 ------------ | -------------
 
-* Click                   | v7.0
-* Flask                   | v1.0.2
-  * Flask-Compress        | v1.4.0
-* Jinja2                  | v2.10
-* Keras                   | v2.2.4
-  * Keras-Applications    | v1.0.7
-  * Keras-Preprocessing   | v1.0.9
-* Markdown                | v3.0.1
-* MarkupSafe              | v1.1.1
-* PyQt5                   | v5.10
-  * PyQt5-sip             | v4.19.14
-* PyYAML                  | v3.13
-* Werkzeug                | v0.14.1
-* absl-py                 | v0.7.0
-* attrs                   | v19.1.0
-* bleach                  | v1.5.0
-* certifi                 | v2019.3.9
-* chardet                 | v3.0.4
-* cycler                  | v0.10.0
-* dash                    | v0.30.0
-  * dash-core-components  | v0.38.0
-  * dash-html-components  | v0.13.2
-  * dash-renderer         | v0.15.0
-  * dash-table            | v3.6.0
-* decorator               | v4.3.2
-* h5py                    | v2.9.0
-* html5lib                | v0.9999999
-* idna                    | v2.8
-* Tensorflow v
+Click                   | v7.0
+Flask                   | v1.0.2
+Flask-Compress        | v1.4.0
+Jinja2                  | v2.10
+Keras                   | v2.2.4
+Keras-Applications    | v1.0.7
+Keras-Preprocessing   | v1.0.9
+Markdown                | v3.0.1
+MarkupSafe              | v1.1.1
+PyQt5                   | v5.10
+PyQt5-sip             | v4.19.14
+PyYAML                  | v3.13
+Werkzeug                | v0.14.1
+absl-py                 | v0.7.0
+attrs                   | v19.1.0
+bleach                  | v1.5.0
+certifi                 | v2019.3.9
+chardet                 | v3.0.4
+cycler                  | v0.10.0
+dash                    | v0.30.0
+dash-core-components  | v0.38.0
+dash-html-components  | v0.13.2
+dash-renderer         | v0.15.0
+dash-table            | v3.6.0
+decorator               | v4.3.2
+h5py                    | v2.9.0
+html5lib                | v0.9999999
+idna                    | v2.8
+Tensorflow              | v
 ## How to Feature Request, Report Issues, or Submit Code for Review ##
 
