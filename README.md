@@ -19,12 +19,12 @@ This Program does three things:
 ## How to Run this Program on Your Machine ##
 There are two ways to get the files needed to run the game on your computer at home.
 1. Clone/Download all files and run as a Python Project (I recommend using PyCharm)
-  * use the package|version table to download all dependancies required for running
-  * run the S&P500GUI.py file and watch the magic happen
+  1. use the package|version table to download all dependancies required for running
+  1. run the S&P500GUI.py file and watch the magic happen
 1. Download the SP500Game.zip folder
-  * this contains ONLY the files needed to run the game and not the additional learning or practice files that this repo also contains
-  * use the package|version table to download all dependancies required for running
-  * run the S&P500GUI.py file and watch the magic happen
+ 1. this contains ONLY the files needed to run the game and not the additional learning or practice files that this repo also contains
+ 1. use the package|version table to download all dependancies required for running
+ 1. run the S&P500GUI.py file and watch the magic happen
 
 Package | Version
 ------------ | -------------
