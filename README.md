@@ -16,7 +16,6 @@ This Program does three things:
 ## How to Run this Program on Your Machine ##
 Package | Version
 ------------ | -------------
-
 Click                   | v7.0
 Flask                   | v1.0.2
 Flask-Compress        | v1.4.0
