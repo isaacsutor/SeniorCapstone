@@ -9,6 +9,9 @@ This Program does three things:
 1. Points players in the direction of additional resources and information on why to not daytrade
 
 ## How the Program Works ##
+* This project uses Dash on Plot.ly to display an interactive graph, allowing players to trade stocks in an attempt to "beat the market" in a simulation fast-paced trading environment. When the time runs out, your results will be displayed and compared to what would have happened if you had simply held your initial portfolio through that time period.
+* **IN ADDITION** the results page will compare the results of our Neural Net playing the same game you played to show you the potential of this budding technology when applied to stock trading
+* Then you will be pointed to educational information where you can find out more about the dangers of day trading and the research being done on Neural Net stock trading.
 
 ## What this Repo Contains ##
 
