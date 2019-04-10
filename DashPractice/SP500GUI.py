@@ -8,6 +8,9 @@ import plotly.graph_objs as go
 from collections import deque
 import pandas
 import csv
+import flask
+import dash
+
 
 X = deque(maxlen=500)
 Y = deque(maxlen=500)
@@ -42,55 +45,70 @@ own_stocks = True
 app = dash.Dash(__name__)
 app.layout = html.Div(
     [
-        html.H3('S&P 500 Stock Trading'),
-        html.Div(html.Button('Click To Start', id='button')),
-        html.Button(
-            "Buy",
-            id="Buy",
-            n_clicks=0,
-            style={"margin": "0px 7px 7px 10px", "textAlign": "center"},
-        ),
-        html.Button(
-            "Sell",
-            id="Sell",
-            n_clicks=0,
-            style={"margin": "0px 7px 7px 10px", "textAlign": "center"},
-        ),
-        html.Div(id='live-update-text'),
-        html.Div(id='res'),
-        dcc.Graph(id='live-graph', animate=True),
-        dcc.Interval(
-            id='graph-update',
-            interval=1 * 100
-        ),
-        html.Div(
-            children=[
-                dcc.Location(id="bottom_tab", refresh=False),
-                # dcc.Link("Open positions", id="open_positions", href="/"),
-                # dcc.Link("Closed positions", id="closed_positions", href="/closed"),
-                # html.Div(
-                # dcc.Dropdown(id="closable_orders", placeholder="Close order"),
-                # style={"width": "15%"},
-                # id="close_orders_div",
-                # ),
-                html.Div(
-                    children=[html.Table(id="orders_table")],
-                    className="row",
-                    style={"padding": "3", "textAlign": "center"},
-                    id="bottom_content",
+        html.Div([
+            html.H1('S&P 500 Stock Trading'),
+            html.H3('by Isaac Sutor', id='author-info'),
+        ], id="top-bar",),
+        html.Div([
+            html.Div(
+                html.Button('Click To Start', id='button'),
+                id="start-btn",
+            ),
+            html.Div([
+                html.Button(
+                    "Buy",
+                    id="Buy",
+                    n_clicks=0,
+                    # style={"margin": "0px 7px 7px 10px", "textAlign": "center"},
                 ),
-            ],
-            id="bottom_panel",
-            className="row",
-            style={
-                "overflowY": "auto",
-                "margin": "9px 5px 0px 5px",
-                "padding": "5",
-                "height": "21%",
-                "backgroundColor": "#1a2d46",
-            },
-        )
-    ]
+                html.Button(
+                    "Sell",
+                    id="Sell",
+                    n_clicks=0,
+                    # style={"margin": "0px 7px 7px 10px", "textAlign": "center"},
+                ), ],
+                id="buy-sell-btn",
+            ),
+            html.Div(id='live-update-text'),
+        ], id="side-bar",),
+
+        html.Div(id='res'),
+        html.Div(
+        [
+            dcc.Graph(id='live-graph', animate=True),
+            dcc.Interval(
+                id='graph-update',
+                interval=1 * 100
+            ),
+            html.Div(
+                children=[
+                    dcc.Location(id="bottom_tab", refresh=False),
+                    # dcc.Link("Open positions", id="open_positions", href="/"),
+                    # dcc.Link("Closed positions", id="closed_positions", href="/closed"),
+                    # html.Div(
+                    # dcc.Dropdown(id="closable_orders", placeholder="Close order"),
+                    # style={"width": "15%"},
+                    # id="close_orders_div",
+                    # ),
+                    html.Div(
+                        children=[html.Table(id="orders_table")],
+                        className="row",
+                        style={"padding": "3", "textAlign": "center"},
+                        id="bottom_content",
+                    ),
+                ],
+                id="bottom_panel",
+                className="row",
+                style={
+                    "overflowY": "auto",
+                    "margin": "9px 5px 0px 5px",
+                    "padding": "5",
+                    "height": "21%",
+                    "backgroundColor": "#1a2d46",
+                },
+            )
+        ], id="graph-panel",),
+        ]
 )
 
 
@@ -126,7 +144,11 @@ def update_graph_scatter(btn_click, buy_click, sell_click):
             y=list(Y),
             name='Scatter',
             # mode= 'lines+markers'
-            mode='lines'
+            mode='lines',
+            line={
+                'color': '#EF553B',
+                'width': 2
+            },
         )
 
         return {'data': [data], 'layout': go.Layout(xaxis=dict(range=[min(X), max(X) + 10]),
@@ -178,9 +200,9 @@ def update_score(buy_click, sell_click):
             start = False
             runResults()
     return [
-        html.Span('Portfolio Value: {0:.2f}'.format(portfolio_val), style=style),
-        html.Span('Stocks Owned: {0:.2f}'.format(stocks_owned), style=style),
-        html.Span('Starting Value: {0:0.2f}'.format(10000), style=style)
+        html.P('Portfolio Value: {0:.2f}'.format(portfolio_val), style=style),
+        html.P('Stocks Owned: {0:.2f}'.format(stocks_owned), style=style),
+        html.P('Starting Value: {0:0.2f}'.format(10000), style=style)
     ]
 
 
