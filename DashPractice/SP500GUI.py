@@ -4,12 +4,14 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly
 import random
+
 import plotly.graph_objs as go
 from collections import deque
 import pandas
 import csv
 import flask
 import dash
+import dash_daq as daq
 
 
 X = deque(maxlen=500)
@@ -78,7 +80,7 @@ app.layout = html.Div(
             dcc.Graph(id='live-graph', animate=True),
             dcc.Interval(
                 id='graph-update',
-                interval=1 * 100
+                # interval=1 * 50
             ),
             html.Div(
                 children=[
@@ -106,7 +108,14 @@ app.layout = html.Div(
                     "height": "21%",
                     "backgroundColor": "#1a2d46",
                 },
-            )
+            ),
+            html.Div([
+                daq.Slider(
+                    id='my-daq-slider',
+                    # value=100
+                ),
+                html.Div(id='slider-output')
+            ])
         ], id="graph-panel",),
         ]
 )
@@ -116,7 +125,7 @@ app.layout = html.Div(
               [
                   Input('button', 'n_clicks'),
                   Input('Buy', 'n_clicks'),
-                  Input('Sell', 'n_clicks')
+                  Input('Sell', 'n_clicks'),
               ],
               events=[Event('graph-update', 'interval')],
               )
@@ -136,7 +145,7 @@ def update_graph_scatter(btn_click, buy_click, sell_click):
         else:
             endGraph()
             runResults()
-            endIntervals()
+            # endIntervals()
             start = False
 
         data = plotly.graph_objs.Scatter(
@@ -196,7 +205,7 @@ def update_score(buy_click, sell_click):
             # print(0)
         else:
             endGraph()
-            endIntervals()
+            # endIntervals()
             start = False
             runResults()
     return [
@@ -215,9 +224,17 @@ def runResults():
     ]
 
 
-@app.callback(Output('graph-update', 'interval'), )
-def endIntervals():
-    return 0
+@app.callback(Output('graph-update', 'interval'),
+             [Input('my-daq-slider', 'value'), ],)
+             # events=[Event('graph-update', 'interval')],)
+def update_interval(value):
+    # shutdown also needs to be added
+    return 300-(value*2)
+
+
+# @app.callback(Output('graph-update', 'interval'), )
+# def endIntervals():
+    # return 0
 
 
 @app.callback(Output('button', 'n_clicks'), )
