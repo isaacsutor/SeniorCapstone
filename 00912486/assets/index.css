@@ -1,0 +1,125 @@
+h1 {
+    margin: auto;
+    text-align: center;
+    color: white;
+    padding-top: 50px;
+}
+body {
+    background-color: #4E6685;
+    color: white;
+}
+#live-graph {
+    background-color: #1A2C46;
+}
+#author-info {
+    float: right;
+    margin-right: 10px;
+}
+#top-bar {
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
+    border-radius: 5px;
+    width: 90%;
+    margin: auto;
+    padding-left: 10px;
+    padding-bottom: 50px;
+}
+#side-bar {
+    float: left;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-right: 0px;
+    min-height: 300px;
+    height: 50%;
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
+    border-radius: 5px;
+    position: fixed;
+}
+#graph-panel {
+    margin-top: 20px;
+    width: 70%;
+    padding-right: 10px;
+    margin-left: 300px;
+    display: inline-block;
+    position: relative;
+}
+#buy-sell-btn {
+    margin: auto;
+}
+
+#start-btn {
+    margin: auto;
+}
+#buy {
+    float: left;
+}
+#sell {
+    float: left;
+}
+
+button {
+    margin: auto;
+	display: inline-block;
+	margin: 20px;
+	font-family: 'Heebo', Helvetica, Arial, sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	letter-spacing: 0.07em;
+	text-transform: uppercase;
+	line-height: 24px;
+	color: white;
+	background-color: #1A2C46;
+	position: relative;
+}
+
+#results-page-win {
+    margin-top: 20px;
+    width: 70%;
+    padding-right: 10px;
+    margin-left: 50px;
+    /*display: inline-block;*/
+    display: none;
+    background-color: #1A2C46 !important;
+    z-index: 1;
+}
+#results-page-lose {
+    margin-top: 20px;
+    width: 74%;
+    margin-left: 50px;
+    /*display: inline-block;*/
+    /*display: none;*/
+    background-color: #1A2C46 !important;
+    z-index: 1;
+}
+#resPage {
+    margin-top: 20px;
+    width: 70%;
+    margin-right: 30px;
+    margin-left: 300px;
+    display: inline-block;
+    /*display: none;*/
+    background-color: #1A2C46 !important;
+    /*z-index: 1;*/
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+#slider-output {
+    margin-top: 20px;
+    background-color: #1A2C46 !important;
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-bottom: 25px;
+}
+
