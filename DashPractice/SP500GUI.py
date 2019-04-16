@@ -34,7 +34,7 @@ with open('SP500.csv') as csvfile:
             vals.append(float(row[4].replace(',', '')))
 # train_size = int(len(vals) * 0.85)
 filter(None, vals)
-train_size = int(len(vals) * 0.99)
+train_size = int(len(vals) * 0.92)
 test_size = len(vals) - train_size
 vals = vals[train_size:len(vals)]
 vals_display = vals
@@ -145,8 +145,8 @@ app.layout = html.Div(
                     updatemode="drag",
                     # value=100
                 ),
-                html.Div(id='slider-output')
-            ])
+                html.Div()
+            ], id='slider-output')
         ], id="graph-panel",),
         ]
 )
@@ -176,7 +176,7 @@ def update_graph_scatter(btn_click, buy_click, sell_click):
             Y.append(vals.pop())
             print(len(vals))
         if len(vals) is 0:
-            endGraph()
+            # endGraph()
             # runResults()
             # endIntervals()
             start = False
@@ -238,7 +238,8 @@ def update_score(buy_click, sell_click):
             # print(stocks_owned)
             # print(0)
         else:
-            endGraph()
+            # endGraph()
+
             # endIntervals()
             start = False
             # runResults()
@@ -264,7 +265,11 @@ def update_score(buy_click, sell_click):
 def update_interval(value):
     # shutdown also needs to be added
     # print(value)
-    return pow(10, 4-value)/2
+    val = pow(10, 4-value)/2
+    if val is not 0:
+        return val
+    else:
+        return 0.1
 
 
 # @app.callback(Output('graph-update', 'interval'), )
@@ -274,20 +279,72 @@ def update_interval(value):
 
 # @app.callback(Output('graph-update', 'interval'),)
 @app.callback(Output('resPage', 'children'),
-                [Input('void', 'n_clicks'), ],)
-def endGraph(value):
+              [Input('Sell', 'n_clicks'), ],
+              events=[Event('graph-update', 'interval')],)
+def endGraph(n_clicks):
+    if n_clicks is 1000000:
+        n_clicks = 0
     # global buttonDisable
     # buttonDisable = True
     # global resDisplay
     # resDisplay = 'inline-block'
     # return 0
     # if win
-    style = {'padding': '5px', 'fontSize': '16px'}
-    return [
-        html.H3('Buy-and-Hold is the best strategy - Warren Buffet'),
-        html.P('If you had held your stocks the whole way through, your end portfolio value would be: $30485.87'),
-        html.P('Because you traded, your actual end portfolio was: ${0:.2f}'.format(portfolio_val)),
-    ]
+    global vals
+    if len(vals) is 0:
+        if portfolio_val < 16484.1:
+            # style = {'padding': '5px', 'fontSize': '16px'}
+            if portfolio_val < 13615.78:
+                return [
+                    html.H3('Buy-and-Hold is the best strategy - Warren Buffet'),
+                    html.P('You should have taken that advise because'),
+                    html.H3('YOU LOST'),
+                    html.P('If you had held your stocks the whole way through, '
+                           'your end portfolio value would be: $16484.10'),
+                    html.P('Our Neural Net managed to complete the same time period with 82.6% accuracy.'),
+                    html.P('This returns a resulting portfolio of $13615.78'),
+                    html.P('Because you traded, you lost to both the market and our Neural Net'),
+                    html.P('Your actual end portfolio was: ${0:.2f}'.format(portfolio_val)),
+                ]
+            else:
+                return [
+                    html.H3('Buy-and-Hold is the best strategy - Warren Buffet'),
+                    html.P('You should have taken that advise because'),
+                    html.H3('YOU LOST'),
+                    html.P('If you had held your stocks the whole way through, '
+                           'your end portfolio value would be: $16484.10'),
+                    html.P('Our Neural Net managed to complete the same time period with 82.6% accuracy.'),
+                    html.P('This returns a resulting portfolio of $13615.78'),
+                    html.P('Because you traded, you lost to the market, '
+                           'but beat our Neural Net with an end portfolio of: ${0:.2f}'.format(portfolio_val)),
+                ]
+        elif portfolio_val > 16484.1:
+            if portfolio_val > 13615.78:
+                return [
+                    # html.H3('Buy-and-Hold is the best strategy - Warren Buffet'),
+                    html.P('Color me impressed because'),
+                    html.H3('YOU BEAT THE MARKET'),
+                    html.P('If you had held your stocks the whole way through, '
+                           'your end portfolio value would be: $16484.10'),
+                    html.P('Our Neural Net managed to complete the same time period with 82.6% accuracy.'),
+                    html.P('This returns a resulting portfolio of $13615.78'),
+                    html.P('Because you traded, you beat the market (and our Neural Net)'
+                           ' with an end portfolio of: ${0:.2f}'.format(portfolio_val)),
+                ]
+            else:
+                return [
+                    # html.H3('Buy-and-Hold is the best strategy - Warren Buffet'),
+                    html.P('Color me impressed because'),
+                    html.H3('YOU BEAT THE MARKET'),
+                    html.P('If you had held your stocks the whole way through, '
+                           'your end portfolio value would be: $16484.10'),
+                    html.P('Our Neural Net managed to complete the same time period with 82.6% accuracy.'),
+                    html.P('This returns a resulting portfolio of $13615.78'),
+                    html.P('Because you traded, you beat the market (but not our Neural Net)'
+                           ' with an end portfolio of: ${0:.2f}'.format(portfolio_val)),
+                ]
+    else:
+        return []
 
 
 # @app.callback(Output('button', 'disabled'))
