@@ -15,7 +15,6 @@ import math
 from keras.models import model_from_json
 
 
-
 np.random.seed(7)
 msft_dataset = pd.read_csv('SP500.csv')
 msft_dataset.head()
@@ -38,8 +37,6 @@ scaler = MinMaxScaler(feature_range=(0, 1))
 msft_close = scaler.fit_transform(msft_close)
 # print(msft_close)
 
-# ::::::::: Original Train_size ::::::::::
-# train_size = int(len(msft_close)*0.7)
 train_size = int(len(msft_close)*0.85)
 test_size = len(msft_close) - train_size
 
@@ -89,7 +86,7 @@ testScore = math.sqrt(mean_squared_error(testY[0], testPredictions[:, 0]))
 print('Train score: %.2f rmse', trainScore)
 print('Test score: %.2f rmse', testScore)
 
-#lets plot the predictions on a graph and see how well it did
+# test model
 train_plot = np.empty_like(msft_close)
 train_plot[:,:] = np.nan
 train_plot[series:len(trainPredictions)+series, :] = trainPredictions

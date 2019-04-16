@@ -32,7 +32,9 @@ with open('SP500.csv') as csvfile:
             count += 1
         else:
             vals.append(float(row[4].replace(',', '')))
-train_size = int(len(vals) * 0.85)
+# train_size = int(len(vals) * 0.85)
+filter(None, vals)
+train_size = int(len(vals) * 0.99)
 test_size = len(vals) - train_size
 vals = vals[train_size:len(vals)]
 vals_display = vals
@@ -44,6 +46,8 @@ stocks_owned = portfolio_val / vals[len(vals) - 1]
 Y.append(vals.pop())
 # print(vals[0])
 own_stocks = True
+buttonDisable = False
+resDisplay = 'none'
 app = dash.Dash(__name__)
 app.layout = html.Div(
     [
@@ -53,33 +57,49 @@ app.layout = html.Div(
         ], id="top-bar",),
         html.Div([
             html.Div(
-                html.Button('Click To Start', id='button'),
+                html.Button('Click To Start', id='button', disabled=buttonDisable),
                 id="start-btn",
             ),
             html.Div([
                 html.Button(
                     "Buy",
                     id="Buy",
+                    disabled=buttonDisable,
                     n_clicks=0,
                     # style={"margin": "0px 7px 7px 10px", "textAlign": "center"},
                 ),
                 html.Button(
                     "Sell",
                     id="Sell",
+                    disabled=buttonDisable,
                     n_clicks=0,
                     # style={"margin": "0px 7px 7px 10px", "textAlign": "center"},
-                ), ],
+                ),
+                html.Button(
+                    "Void",
+                    id="void",
+                    n_clicks=0,
+                    style={"display": "none"},
+                )
+                ],
                 id="buy-sell-btn",
             ),
             html.Div(id='live-update-text'),
         ], id="side-bar",),
-        html.Div([
-            html.H1("YOU LOST."),
-            ], id='results-page-lose'),
+        html.Div(id='resPage'),
 
         html.Div([
-           html.H1("YOU WON YOU ROCK")
-        ], id='results-page-win'),
+            html.H1("YOU LOST."),
+            ],
+            id='results-page-lose',
+            style={"display": resDisplay}),
+
+        html.Div([
+            html.H1("YOU WON YOU ROCK")
+            ],
+            id='results-page-win',
+            style={"display": resDisplay}
+            ),
         html.Div(
         [
             dcc.Graph(id='live-graph', animate=True),
@@ -151,11 +171,13 @@ def update_graph_scatter(btn_click, buy_click, sell_click):
         # Y.append(Y[-1]+Y[-1]*random.uniform(-0.1,0.1))
         # X.append(dates.pop())
         # Y.append(stock_value.pop())
+        global vals
         if len(vals) != 0:
             Y.append(vals.pop())
-        else:
+            print(len(vals))
+        if len(vals) is 0:
             endGraph()
-            runResults()
+            # runResults()
             # endIntervals()
             start = False
 
@@ -191,6 +213,7 @@ def update_score(buy_click, sell_click):
         global portfolio_val
         global own_stocks
         global vals_display
+        print("vals", len(vals_display))
         # print(vals[len(vals)-1])
         if len(vals_display) != 0:
             if sell_click is 1:
@@ -218,7 +241,7 @@ def update_score(buy_click, sell_click):
             endGraph()
             # endIntervals()
             start = False
-            runResults()
+            # runResults()
     return [
         html.P('Portfolio Value: {0:.2f}'.format(portfolio_val), style=style),
         html.P('Stocks Owned: {0:.2f}'.format(stocks_owned), style=style),
@@ -226,13 +249,13 @@ def update_score(buy_click, sell_click):
     ]
 
 
-@app.callback(Output('res', 'children'), )
-def runResults():
+# @app.callback(Output('res', 'children'), )
+# def runResults():
     # style = {'padding': '5px', 'fontSize': '16px'}
-    return [
-        html.H3('If you had held your stocks the whole way through, your end portfolio value would be: $30485.87'),
+    # return [
+        # html.H3('If you had held your stocks the whole way through, your end portfolio value would be: $30485.87'),
         # html.Span('Portfolio Value: {0:.2f}'.format(portfolio_val), style=style),
-    ]
+    # ]
 
 
 @app.callback(Output('graph-update', 'interval'),
@@ -240,7 +263,7 @@ def runResults():
              # events=[Event('graph-update', 'interval')],)
 def update_interval(value):
     # shutdown also needs to be added
-    print(value)
+    # print(value)
     return pow(10, 4-value)/2
 
 
@@ -249,15 +272,27 @@ def update_interval(value):
     # return 0
 
 
-@app.callback(Output('graph-update', 'interval'), )
-def endGraph():
-    buttonsOff()
-    return 0
+# @app.callback(Output('graph-update', 'interval'),)
+@app.callback(Output('resPage', 'children'),
+                [Input('void', 'n_clicks'), ],)
+def endGraph(value):
+    # global buttonDisable
+    # buttonDisable = True
+    # global resDisplay
+    # resDisplay = 'inline-block'
+    # return 0
+    # if win
+    style = {'padding': '5px', 'fontSize': '16px'}
+    return [
+        html.H3('Buy-and-Hold is the best strategy - Warren Buffet'),
+        html.P('If you had held your stocks the whole way through, your end portfolio value would be: $30485.87'),
+        html.P('Because you traded, your actual end portfolio was: ${0:.2f}'.format(portfolio_val)),
+    ]
 
 
-@app.callback(Output('button', 'disabled'))
-def buttonsOff():
-    return True
+# @app.callback(Output('button', 'disabled'))
+# def buttonsOff():
+    # return True
 
 
 @app.callback(Output('Buy', 'n_clicks'),
@@ -272,18 +307,14 @@ def update():
     return 0
 
 
-@app.callback(Output('results-page-win'))
-def pageWin():
-    return 0
+# @app.callback(Output('results-page-win'))
+# def pageWin():
+    # return 0
 
 
-
-@app.callaback(Output('results-page-lose'))
-def pageLose():
-    return 0
-
-
-
+# @app.callaback(Output('results-page-lose'))
+# def pageLose():
+    # return 0
 
 if __name__ == '__main__':
     app.run_server(debug=True)

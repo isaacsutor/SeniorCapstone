@@ -32,17 +32,20 @@ body {
     margin-bottom: 0px;
     margin-left: 10px;
     margin-right: 0px;
-    height: 100%;
+    min-height: 300px;
+    height: 50%;
     border-style: solid;
     border-width: 5px;
     border-color: white;
     border-radius: 5px;
+    position: fixed;
 }
 #graph-panel {
     margin-top: 20px;
     width: 74%;
-    margin-left: 50px;
+    margin-left: 300px;
     display: inline-block;
+    position: relative;
 }
 #buy-sell-btn {
     margin: auto;
@@ -87,7 +90,22 @@ button {
     width: 74%;
     margin-left: 50px;
     /*display: inline-block;*/
-    display: none;
+    /*display: none;*/
     background-color: #1A2C46 !important;
     z-index: 1;
+}
+#resPage {
+    margin-top: 20px;
+    width: 72%;
+    margin-left: 300px;
+    display: inline-block;
+    /*display: none;*/
+    background-color: #1A2C46 !important;
+    /*z-index: 1;*/
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-bottom: 15px;
 }
