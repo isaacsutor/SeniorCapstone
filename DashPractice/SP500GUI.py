@@ -73,8 +73,13 @@ app.layout = html.Div(
             ),
             html.Div(id='live-update-text'),
         ], id="side-bar",),
+        html.Div([
+            html.H1("YOU LOST."),
+            ], id='results-page-lose'),
 
-        html.Div(id='res'),
+        html.Div([
+           html.H1("YOU WON YOU ROCK")
+        ], id='results-page-win'),
         html.Div(
         [
             dcc.Graph(id='live-graph', animate=True),
@@ -110,8 +115,14 @@ app.layout = html.Div(
                 },
             ),
             html.Div([
+                html.P("Adjust Play Speed"),
                 daq.Slider(
                     id='my-daq-slider',
+                    marks={i: '{}'.format(10 ** i) for i in range(2)},
+                    max=1,
+                    value=1,
+                    step=0.01,
+                    updatemode="drag",
                     # value=100
                 ),
                 html.Div(id='slider-output')
@@ -229,7 +240,8 @@ def runResults():
              # events=[Event('graph-update', 'interval')],)
 def update_interval(value):
     # shutdown also needs to be added
-    return 300-(value*2)
+    print(value)
+    return pow(10, 4-value)/2
 
 
 # @app.callback(Output('graph-update', 'interval'), )
@@ -237,9 +249,15 @@ def update_interval(value):
     # return 0
 
 
-@app.callback(Output('button', 'n_clicks'), )
+@app.callback(Output('graph-update', 'interval'), )
 def endGraph():
+    buttonsOff()
     return 0
+
+
+@app.callback(Output('button', 'disabled'))
+def buttonsOff():
+    return True
 
 
 @app.callback(Output('Buy', 'n_clicks'),
@@ -252,6 +270,19 @@ def update():
               events=[Event('graph-update', 'interval')], )
 def update():
     return 0
+
+
+@app.callback(Output('results-page-win'))
+def pageWin():
+    return 0
+
+
+
+@app.callaback(Output('results-page-lose'))
+def pageLose():
+    return 0
+
+
 
 
 if __name__ == '__main__':

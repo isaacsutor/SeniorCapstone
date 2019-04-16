@@ -72,3 +72,22 @@ button {
 	background-color: #1A2C46;
 	position: relative;
 }
+
+#results-page-win {
+    margin-top: 20px;
+    width: 74%;
+    margin-left: 50px;
+    /*display: inline-block;*/
+    display: none;
+    background-color: #1A2C46 !important;
+    z-index: 1;
+}
+#results-page-lose {
+    margin-top: 20px;
+    width: 74%;
+    margin-left: 50px;
+    /*display: inline-block;*/
+    display: none;
+    background-color: #1A2C46 !important;
+    z-index: 1;
+}
