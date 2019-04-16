@@ -14,6 +14,11 @@ This Program does three things:
 * Then you will be pointed to educational information where you can find out more about the dangers of day trading and the research being done on Neural Net stock trading.
 
 ## What this Repo Contains ##
+The 00912486 folder contains the essentials needed to run the app.
+The img folder contains images of the Neural Net as it was trained.
+The Dash Practice folder contains the tutorials I completed to learn Dash during this process
+The loose files in the SeniorCapstone root folder contain the model files, Neural Net tutorials, 
+    and PyQt tutorials I completed during this process
 
 
 ## How to Run this Program on Your Machine ##
@@ -21,7 +26,7 @@ There are two ways to get the files needed to run the game on your computer at h
 1. Clone/Download all files and run as a Python Project (I recommend using PyCharm)
    1. use the package|version table to download all dependancies required for running
    1. run the S&P500GUI.py file and watch the magic happen
-1. Download the SP500Game.zip folder
+1. Download the 00912486.zip folder
    1. this contains ONLY the files needed to run the game and not the additional learning or practice files that this repo also contains
    1. use the package|version table to download all dependancies required for running
    1. run the S&P500GUI.py file and watch the magic happen
